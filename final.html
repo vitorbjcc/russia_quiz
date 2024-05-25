@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz - Score</title>
+    <link rel="shortcut icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAARMAAAC3CAMAAAAGjUrGAAAAD1BMVEX///8AOabVKx4AMqTTKxXmvQ9FAAAA9UlEQVR4nO3QsQGAMAzAsBT4/2b2eOwqnaAZAAAAAAAAAAAAAAAAAAAAAK69bHPYnJSTclJOykk5KSflpJyUk3JSTspJOSkn5aSclJNyUk7KSTkpJ+WknJSTclJOykk5KSflpJyUk3JSTspJOSkn5aSclJNyUk7KSTkpJ+WknJSTclJOykk5KSflpJyUk3JS87HNw+aknJSTclJOykk5KSflpJyUk3JSTspJOSkn5aSclJNyUk7KSTkpJ+WknJSTclJOykk5KSflpJyUk3JSTspJOSkn5aSclJNyUk7KSTkpJ+WknJSTclJOykk5KSflpJyUk/oBg6TI4mvpq6EAAAAASUVORK5CYII=" type="image/png">
+    <script>
+        function load() // When Body Load
+        {
+            // Create Score
+            var score = 0;
+
+            // Get the params of URL
+            const params = new URLSearchParams(window.location.search);
+
+            // Get User Answers list
+            const u_answers_list = document.getElementById("res");
+
+            // Get Score Div
+            const final_score = document.getElementById("final_score");
+
+            // Get User Answers
+            const answers = [
+                params.get("capital"),
+                params.get("religion"),
+                params.get("flag"),
+                params.get("family"),
+                params.get("year")
+            ];
+
+            // Verify if any User Answers is null
+            for (var i = 0; i < answers.length; i++)
+            {
+                // If this element is null
+                if (answers[i] === null)
+                {
+                    // Come Back To Quiz
+                    window.location = "./index.html";
+                }
+            }
+
+            // Create Correct Answers
+            const correct_answers = [
+                "Moscow",
+                "Orthodox",
+                "Russia",
+                "Real Family",
+                "1917"
+            ];
+
+            // Send Correct Answers To Div
+            sendCorrectAnswers(correct_answers);
+
+            // For each element in answers, show
+            for (var i = 0; i < answers.length; i++)
+            {
+                // Create li
+                var li = document.createElement("li");
+
+                // Put Text into li
+                li.innerText = answers[i];
+
+                // Verify if answers is correct
+                if (answers[i] === correct_answers[i])
+                {
+                    // Increase Score
+                    score++;
+                }
+
+                // After that put into list
+                u_answers_list.appendChild(li);
+            }
+
+            // After FOR loop we had the score
+            // So, we need to put into Final Score Div
+
+            // Create Paragraph
+            var p_score = document.createElement("p");
+
+            // Add text
+            p_score.innerHTML = `Your Final Score Was <strong>${score}/5</strong>`;
+
+            // Add to Final Score Div
+            final_score.appendChild(p_score);
+        }
+
+        function sendCorrectAnswers(correct_answers) // When Load Call
+        {
+            // Get correct_answers list
+            const c_div = document.getElementById("c_answers");
+
+            // For each element in array, show
+            for (var i = 0; i < correct_answers.length; i++)
+            {
+                // Create a Paragraph
+                var li = document.createElement("li");
+
+                // Put text into paragraph
+                li.innerText = correct_answers[i];
+
+                // Append into list
+                c_div.appendChild(li);
+            }
+        }
+    </script>
+    <style>
+        body, h1, h2
+        {
+            padding: 0;
+            margin: 0;
+        }
+
+        header
+        {
+            background-color: #3071ff;
+            color: #fff;
+            text-align: center;
+            font-family: Verdana, Arial, Helvetica;
+            padding: 5px;
+        }
+
+        nav, a
+        {
+            background-color: #000;
+            color: #fff;
+            padding: 5px;
+            font-family: Verdana, Arial, Helvetica;
+            text-align: center;
+        }
+
+        section, main
+        {
+            padding-left: 15px;
+        }
+    </style>
+</head>
+<body onload="load();">
+    <header>
+        <h1>Quiz</h1>
+        <h2>About Russia - Final Score</h2>
+    </header>
+    <nav>
+        <a href="./index.html">Want To Try Again?</a>
+    </nav>
+    <section>
+        <p><strong>Correct Answers:</strong></p>
+        <ol id="c_answers">
+            
+        </ol>
+    </section>
+    <main>
+        <p><strong>Your Answers:</strong></p>
+        <ol id="res">
+
+        </ol>
+        <div id="final_score">
+            <p><strong>Final Score:</strong></p>
+        </div>
+    </main>
+</body>
+</html>
