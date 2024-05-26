@@ -59,7 +59,7 @@
                 var li = document.createElement("li");
 
                 // Put Text into li
-                li.innerText = answers[i];
+                li.innerText = `${i+1}. ${answers[i]}`;
 
                 // Verify if answers is correct
                 if (answers[i] === correct_answers[i])
@@ -97,7 +97,7 @@
                 var li = document.createElement("li");
 
                 // Put text into paragraph
-                li.innerText = correct_answers[i];
+                li.innerText = `${i+1}. ${correct_answers[i]}`;
 
                 // Append into list
                 c_div.appendChild(li);
@@ -109,7 +109,7 @@
         {
             overflow-x: hidden;
         }
-        
+
         body, h1, h2
         {
             padding: 0;
